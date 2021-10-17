@@ -221,7 +221,11 @@ class ConvertModel(nn.Module):
                 for out_op_id, output in zip(node.output, op(*in_activations)):
                     activations[out_op_id] = output
             else:
-                activations[out_op_id] = op(*in_activations)
+                # TODO: Hack
+                try:
+                    activations[out_op_id] = op(*in_activations)
+                except Exception as e:
+                    pass
 
             # Remove activations that are no longer needed
             for in_op_id in node.input:
