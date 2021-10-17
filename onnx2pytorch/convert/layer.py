@@ -7,6 +7,7 @@ from onnx2pytorch.operations import (
     BatchNormWrapper,
     InstanceNormWrapper,
     LSTMWrapper,
+    LocalResponseNormUnsafe,
 )
 from onnx2pytorch.convert.attribute import extract_attributes, extract_attr_values
 
@@ -95,6 +96,20 @@ def convert_batch_norm_layer(node, params):
     layer = layer(torch_params, **kwargs)
     return layer
 
+def convert_local_response_norm_layer(node, params):
+    kwargs = extract_attributes(node)
+
+    # print("------")
+    # print(kwargs)
+
+    size = kwargs["size"]
+    alpha = kwargs["weight_multiplier"]
+    beta = kwargs["bias_multiplier"]
+    k = kwargs["bias"]
+
+    layer = LocalResponseNormUnsafe(size=size, alpha=alpha, beta=beta, k=k)
+
+    return layer
 
 def convert_instance_norm_layer(node, params):
     kwargs = extract_attributes(node)

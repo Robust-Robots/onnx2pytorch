@@ -12,6 +12,7 @@ from .gather import Gather
 from .gathernd import GatherND
 from .globalaveragepool import GlobalAveragePool
 from .instancenorm import InstanceNormWrapper
+from .localresponsenorm import LocalResponseNormUnsafe
 from .loop import Loop
 from .lstm import LSTMWrapper
 from .matmul import MatMul
