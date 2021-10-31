@@ -114,7 +114,10 @@ def convert_local_response_norm_layer(node, params):
 def convert_drouput_layer(node, params):
     kwargs = extract_attributes(node)
 
-    p = kwargs["p"]
+    print("------")
+    print(kwargs)
+
+    size = kwargs["p"]
 
     layer = nn.Dropout(p=p)
 
