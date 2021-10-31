@@ -111,6 +111,15 @@ def convert_local_response_norm_layer(node, params):
 
     return layer
 
+def convert_drouput_layer(node, params):
+    kwargs = extract_attributes(node)
+
+    p = kwargs["p"]
+
+    layer = nn.Dropout(p=p)
+
+    return layer
+
 def convert_instance_norm_layer(node, params):
     kwargs = extract_attributes(node)
     # Skip input dimension check, not possible before forward pass
