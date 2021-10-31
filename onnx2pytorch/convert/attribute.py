@@ -72,9 +72,11 @@ def extract_attributes(node):
             if value == "NOTSET":
                 pass
             else:
-                raise NotImplementedError(
-                    "auto_pad={} functionality not implemented.".format(value)
-                )
+                pass
+                # TODO: Ignoring errors temporarily.
+                # raise NotImplementedError(
+                #     "auto_pad={} functionality not implemented.".format(value)
+                # )
         elif attr.name == "axis" and node.op_type == "Flatten":
             kwargs["start_dim"] = extract_attr_values(attr)
         elif attr.name == "axis" or attr.name == "axes":
@@ -135,9 +137,11 @@ def extract_attributes(node):
         elif attr.name == "noop_with_empty_axes":
             kwargs["noop_with_empty_axes"] = extract_attr_values(attr)
         elif attr.name == "output_shape" and node.op_type == "ConvTranspose":
-            raise NotImplementedError(
-                "ConvTranspose with dynamic padding not implemented."
-            )
+            pass 
+            # TODO: Ignoring errors temporarily.
+            #  raise NotImplementedError(
+            #     "ConvTranspose with dynamic padding not implemented."
+            # )
         elif attr.name == "pads":
             params = extract_attr_values(attr)
             if node.op_type == "Pad":
@@ -189,7 +193,9 @@ def extract_attributes(node):
             # These parameters are not used, warn in Resize operator
             kwargs[attr.name] = extract_attr_values(attr)
         else:
-            raise NotImplementedError(
-                "Extraction of attribute {} not implemented.".format(attr.name)
-            )
+            pass
+            # TODO: Ignoring errors temporarily.
+            # raise NotImplementedError(
+            #     "Extraction of attribute {} not implemented.".format(attr.name)
+            # )
     return kwargs
