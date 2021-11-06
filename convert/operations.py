@@ -15,7 +15,7 @@ from onnx2pytorch.convert.layer import (
     convert_linear_layer,
     convert_batch_norm_layer,
     convert_local_response_norm_layer,
-    convert_drouput_layer,
+    convert_dropout_layer,
     convert_instance_norm_layer,
     convert_lstm_layer,
 )
@@ -94,7 +94,7 @@ def convert_operations(onnx_graph, opset_version, batch_dim=0, enable_pruning=Tr
         elif node.op_type == "LRN":
             op = convert_local_response_norm_layer(node, params=params)
         elif node.op_type == "Dropout":
-            op = convert_drouput_layer(node, params=params)
+            op = convert_dropout_layer(node, params=params)
         elif node.op_type == "Cast":
             op = Cast(**extract_attributes(node))
         elif node.op_type == "Ceil":

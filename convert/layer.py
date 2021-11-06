@@ -111,7 +111,7 @@ def convert_local_response_norm_layer(node, params):
 
     return layer
 
-def convert_drouput_layer(node, params):
+def convert_dropout_layer(node, params):
     kwargs = extract_attributes(node)
 
     p = kwargs["p"] if "p" in kwargs else 0.5
