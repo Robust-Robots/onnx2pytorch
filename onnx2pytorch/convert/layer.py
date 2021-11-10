@@ -50,6 +50,12 @@ def convert_layer(node, layer_type, params=None):
             "Unexpected length of kernel_size dimension: {}".format(kernel_size_length)
         )
 
+    # TODO: Hack?
+    if "auto_pad" in kwargs:
+        padding_type = kwargs.pop("auto_pad")
+        if padding_type == "SAME_UPPER" or padding_type == "SAME_LOWER":
+            kwargs["padding"] = kwargs["kernel_size"][0] // 2
+
     pad_layer = None
     if params:
         weight, bias = extract_params(params)
